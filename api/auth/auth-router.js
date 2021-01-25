@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const supposedUser = await User.findBy({ username }).first();
+        const supposedUser = await User.getBy({ username }).first();
         if (supposedUser && bcrypt.compareSync(password, supposedUser.password)) {
             req.session.user = supposedUser;
             res.json({ message: "Logged in", cookie: supposedUser.id });
